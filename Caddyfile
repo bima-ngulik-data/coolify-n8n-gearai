@@ -1,0 +1,15 @@
+# global options (optional, but you can add your email for Let’s Encrypt here)
+{
+  # email you@your-domain.com
+  # acme_ca https://acme-v02.api.letsencrypt.org/directory
+}
+
+your.n8n.domain.com {
+  encode gzip
+  reverse_proxy n8n:5678 {
+    header_up Host      {host}
+    header_up X-Real-IP {remote}
+    header_up X-Forwarded-For {remote}
+    header_up X-Forwarded-Proto {scheme}
+  }
+}
